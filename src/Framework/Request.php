@@ -101,6 +101,10 @@ class Request
     
     public function getPath()
     {
+        if (!$this->_htaccess) {
+            return $_SERVER['PHP_SELF'];
+        }
+
         return $_SERVER['REQUEST_URI'];
     }
     
@@ -120,7 +124,13 @@ class Request
     
     public function getPathInfo() 
     {
-        return substr($this->getPath(), strlen($this->getScriptName()));
+        $path = substr($this->getPath(), strlen($this->getScriptName()));
+        
+        if (empty($path)) {
+            return '/';
+        }
+
+        return $path;
     }
     
     public function getIp()
