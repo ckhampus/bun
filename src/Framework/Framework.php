@@ -36,11 +36,13 @@ class Framework implements \ArrayAccess
     //======================//   
     
     private $_routes;
+    private $_route_matched;
     private $_container;
 
     function __construct()
     {
         $this->_routes = array();
+        $this->_route_matched = FALSE;
         $this->_container = array(
             'request' => new Request()
         );
@@ -210,9 +212,12 @@ class Framework implements \ArrayAccess
                     ob_end_clean();
                     
                     echo $output;
+                    return TRUE;
                 }
             }
         }
+
+        return FALSE;
     }
 
     /**
@@ -239,6 +244,10 @@ class Framework implements \ArrayAccess
                 'path'      => $path,
                 'action'    => $action
             );
+        }
+        
+        if ($this->_route_matched === FALSE) {
+            $this->_route_matched = $this->dispatch();
         }
     }
 
@@ -311,10 +320,6 @@ function get($path, $action, $name = NULL) {
 
 function post($path, $action, $name = NULL) {
     $GLOBALS['app']->addRoute('GET', $path, $action, $name);
-}
-
-function run() {
-    $GLOBALS['app']->dispatch();
 }
 
 //====================//

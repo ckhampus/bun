@@ -58,14 +58,6 @@ function cache_control($options) {
     }
 }
 
-function sass($stylesheet) {
-
-}
-
-function scss($stylesheet) {
-
-}
-
 //====================//
 //  Helper functions  //
 //====================//

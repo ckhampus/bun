@@ -20,10 +20,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
+
+/*
 if (!extension_loaded('http')) {
     throw new \RuntimeException('The framework relies on the HTTP extension, which is not available on your PHP installation.');
 }
+*/
  
 require_once(__DIR__.'/../vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php');
 
